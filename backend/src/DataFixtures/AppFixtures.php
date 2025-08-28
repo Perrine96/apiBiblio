@@ -6,11 +6,32 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Author;
 use App\Entity\Book;
+use App\Entity\Editor;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        // Création des éditeurs
+        $editor1 = new Editor(); 
+        $editor1->setName('Gallimard'); 
+        $editor1->setHeadquarters('Paris, France'); 
+        $editor1->setFoundedAt(new \DateTime('1911-05-31'));
+        $manager->persist($editor1);
+        
+        $editor2 = new Editor(); 
+        $editor2->setName('Penguin Books'); 
+        $editor2->setHeadquarters('Londres, Royaume-Uni'); 
+        $editor2->setFoundedAt(new \DateTime('1935-07-30'));
+        $manager->persist($editor2);
+        
+        $editor3 = new Editor(); 
+        $editor3->setName('Bloomsbury'); 
+        $editor3->setHeadquarters('Londres, Royaume-Uni'); 
+        $editor3->setFoundedAt(new \DateTime('1986-01-01'));
+        $manager->persist($editor3);
+
+        // Création des auteurs
         $author1 =new Author(); $author1->setFirstName('Antoine'); $author1->setLastName('de Saint Exupéry'); $author1->setCountry('France'); 
         $manager->persist($author1);
         $author2 = new Author(); $author2->setFirstName('George'); $author2->setLastName('Orwell'); $author2->setCountry('Royaume-Uni'); 
@@ -18,6 +39,7 @@ class AppFixtures extends Fixture
         $author3 = new Author(); $author3->setFirstName('Joanne'); $author3->setLastName('Rowling'); $author3->setCountry('Royaume-Uni'); 
         $manager->persist($author3);
 
+        // Création des livres
         $book1 = new Book();
         $book1->setTitle('Le Petit Prince');
         $book1->setDescription('L\'histoire d\'un petit prince qui voyage de planète en planète.');
